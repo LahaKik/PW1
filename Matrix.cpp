@@ -1,23 +1,38 @@
 #include "Matrix.h"
 
-Matrix::Matrix(unsigned int size): size(size)
+Matrix::Matrix(Uint size) : size(size)
 {
 
 	values = new number * [size];
-	int t = rand() % 50;
-	for (unsigned int i = 0; i < size; i++)
+	for (Uint i = 0; i < size; i++)
 	{
 		*(values + i) = new number[size];
-		for (unsigned int j = 0; j < size; j++)
+		for (Uint j = 0; j < size; j++)
 		{
-			*(*(values + i) + j) = t;
-			t = rand() % 50;
+			*(*(values + i) + j) = 1;
 		}
 	}
 }
+
+Matrix::Matrix(Uint size, number* inpNum): size(size)
+{
+
+	values = new number * [size];
+	int t = 0;
+	for (Uint i = 0; i < size; i++)
+	{
+		*(values + i) = new number[size];
+		for (Uint j = 0; j < size; j++)
+		{
+			*(*(values + i) + j) = inpNum[t];
+			t++;
+		}
+	}
+}
+
 Matrix::~Matrix()
 {
-	for (unsigned int i = 0; i < size; i++)
+	for (Uint i = 0; i < size; i++)
 	{
 		delete[] * (values + i);
 	}
@@ -104,5 +119,9 @@ int Matrix::ComputeRank()
 		else
 			break;
 	}
+
+	this->copyMatrix(&temp);
+
 	return rank;
 }
+

@@ -1,10 +1,9 @@
-#include "Matrix.h"
+#include "App.h"
 
 
 int main()
 {
 	std::cout.precision(2);
-	Matrix a(5);
-	a.Print();
-	std::cout << std::endl << a.ComputeRank();
+	App app;
+	return app.exec();
 }
